@@ -88,6 +88,8 @@ Using react toast error messaging for error handling, unsuccessful tasks and fal
 
 - npm run dev
 
+---
+
 ## ✅ Deliverables
 
 - Fully functional and styled Todo application
