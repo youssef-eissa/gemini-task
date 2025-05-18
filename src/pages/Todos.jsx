@@ -4,7 +4,7 @@ import SubmitTodoForm from "../components/SubmitTodoForm";
 import TodosList from "../components/TodosList";
 import { useGetTodosQuery } from "../services/todoApi";
 
-function Tasks() {
+function Todos() {
     const { data: todos , isLoading,error } = useGetTodosQuery();
      useEffect(()=>{
         if(error){
@@ -25,4 +25,4 @@ function Tasks() {
   )
 }
 
-export default Tasks
+export default Todos

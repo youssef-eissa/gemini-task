@@ -12,7 +12,7 @@ function TodosList({todos}) {
         ))}
     </ul>
    :
-   <h1 className="text-mainColor sm:text-2xl font-alpha text-lg ">No todos yet</h1>
+   <h1 className="text-mainColor sm:text-2xl font-alpha text-lg ">No Tasks Yet</h1>
   )
 }
 

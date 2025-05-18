@@ -3,7 +3,7 @@ import './App.css'
 import { Routes, Route  } from 'react-router-dom';
 import Home from './pages/Home'
 import Navbar from './components/Navbar';
-import Tasks from './pages/Tasks';
+import Todos from './pages/Todos';
   import { ToastContainer } from 'react-toastify';
 
 
@@ -16,7 +16,7 @@ function App() {
     <Navbar/>
      <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/todos" element={<Tasks />} />
+      <Route path="/todos" element={<Todos />} />
     </Routes>
     <ToastContainer
 

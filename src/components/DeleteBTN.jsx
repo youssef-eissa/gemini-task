@@ -10,7 +10,7 @@ function DeleteBTN({id}) {
 
     const handleDelete=useCallback(async()=>{
      await deleteTodo(id)
-       toast.success("Todo deleted successfully")
+       toast.success("Task deleted successfully")
     },[id,deleteTodo])
 
   return (
