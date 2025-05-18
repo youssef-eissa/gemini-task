@@ -16,7 +16,7 @@ function App() {
     <Navbar/>
      <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/tasks" element={<Tasks />} />
+      <Route path="/todos" element={<Tasks />} />
     </Routes>
     <ToastContainer
 

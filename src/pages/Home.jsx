@@ -51,7 +51,7 @@ if(isLoading){
      </div>
       {/* todos statistics */}
         
-        <Link className="w-fit mx-auto flex items-center justify-center gap-2 bg-actionColor hover:bg-actionColor/90  rounded p-3 lg:p-2 md:p-2 xs:p-1 transition duration-300  font-bebas tracking-widest lg:text-xl text-base" to={"/tasks"}>  <IoAddOutline/> Add Task</Link>
+        <Link className="w-fit mx-auto flex items-center justify-center gap-2 bg-actionColor hover:bg-actionColor/90  rounded p-3 lg:p-2 md:p-2 xs:p-1 transition duration-300  font-bebas tracking-widest lg:text-xl text-base" to={"/todos"}>  <IoAddOutline/> Add Task</Link>
 
     </main>
   )

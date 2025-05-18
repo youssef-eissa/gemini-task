@@ -9,8 +9,8 @@ function Navbar() {
     },
     {
       id:2,
-      name:"Tasks",
-      path:"/tasks"
+      name:"Todos",
+      path:"/todos"
     }
   ]
   return (
