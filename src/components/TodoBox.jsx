@@ -82,7 +82,7 @@ function TodoBox({todo}) {
 
 
   return (
-    <form action={formAction} className="w-full flex sm:flex-row flex-col items-center justify-between gap-4  ">
+    <form action={formAction} className="w-full flex md:flex-row flex-col items-center justify-between gap-4  ">
         {/* checkbox */}
 <div  className="checkbox-wrapper">
   <input onChange={toggleTodoStatus} id={`todo-${todo.id}`} name="checkbox" defaultChecked={todo.status} type="checkbox"/>
