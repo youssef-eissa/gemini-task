@@ -4,7 +4,7 @@ import { useAddTodoMutation } from "../services/todoApi"
 
 
 function SubmitTodoForm() {
-    const [addTodo]=useAddTodoMutation()
+const [addTodo]=useAddTodoMutation()
 const [state,formAction,isPending]=useActionState(submitTodo,null)
 
 const [todoData,setTodoData]=useState({title:"",description:""})
@@ -31,12 +31,16 @@ async function submitTodo(prevState, formData) {
         toast.error("Error adding task")
     }
 }
+
+function handleOnChange(e){
+    setTodoData({...todoData,[e.target.name]:e.target.value})
+}
    
   return (
- <form action={formAction} className="border border-mainColor p-3 rounded flex flex-col gap-3">
-    <input value={todoData.title} onChange={e=>setTodoData({...todoData,title:e.target.value})} autoComplete="off" type="text" name="title" placeholder="Add Task Title" className={` bg-inputBG p-2 rounded-lg placeholder:text-placeholderColor sm:text-base text-xs text-mainColor outline-none ${state?.title&& "border border-red-500"}`}/>
+ <form action={formAction} className="border w-[600px] border-mainColor p-3 rounded flex flex-col gap-3 bg-placeholderColor">
+    <input value={todoData.title} onChange={e=>handleOnChange(e)} autoComplete="off" type="text" name="title" placeholder="Add Task Title" className={` bg-inputBG p-2 rounded-lg placeholder:text-placeholderColor sm:text-base text-xs text-mainColor outline-none ${state?.title&& "border border-red-500"}`}/>
     {state?.title&&<span className="text-red-500 text-sm">{state.title}</span>}
-     <textarea value={todoData.description} onChange={e=>setTodoData({...todoData,description:e.target.value})} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor text-mainColor resize-none h-[100px] outline-none ${state?.description&& "border border-red-500"}`}/>
+     <textarea value={todoData.description} onChange={e=>handleOnChange(e)} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor text-mainColor resize-none h-[100px] outline-none ${state?.description&& "border border-red-500"}`}/>
     {state?.description&&<span className="text-red-500 text-sm">{state.description}</span>}
 
      <button disabled={isPending} type="submit" className="bg-actionColor lg:p-2 p-1 lg:text-base text-sm  rounded-lg text-black font-bold disabled:bg-actionColor/50 disabled:cursor-not-allowed cursor-pointer ">Submit</button>

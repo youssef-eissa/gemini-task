@@ -1,6 +1,6 @@
 # ✅ Todo App
 
-A clean and functional Todo application built with **React** and styled using **Tailwind CSS**. The app connects to a simulated backend via **MockAPI**, handles API communication with **Redux Toolkit Query**, and includes client-side routing using **React Router**. Users receive real-time feedback with toast notifications for all key actions.
+A fully responsive and functional Todo application built with **React** and styled using **Tailwind CSS**. The app connects to a simulated backend via **MockAPI**, handles API communication with **Redux Toolkit Query**, and includes client-side routing using **React Router**. Users receive real-time feedback with toast notifications for all key actions.
 
 
 ---
@@ -46,6 +46,12 @@ Visit the app here: https://gemini-task-inky.vercel.app
 
 ---
 
+## 📝 Todo Modal
+
+ Todo Modal is a reusable component for handling Todo submition or editing, in which displays different forms depending on needed operation
+
+--
+
 ## 🔌 API & Data
 
 - **Backend**: Simulated using [MockAPI](https://mockapi.io)
@@ -80,13 +86,13 @@ Using react toast error messaging for error handling, unsuccessful tasks and fal
 
 ## ⚙️ How to Run Locally
 
-- git clone git@github.com:youssef-eissa/gemini-task.git
+- `git clone git@github.com:youssef-eissa/gemini-task.git`
 
-- cd gemini-task
+- `cd gemini-task`
 
-- npm install
+- `npm install`
 
-- npm run dev
+- `npm run dev`
 
 ---
 

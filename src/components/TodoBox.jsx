@@ -1,45 +1,21 @@
-import { useCallback, useOptimistic,startTransition, useState, useRef, useActionState, useEffect } from "react"
+import { useCallback, useOptimistic,startTransition, useState } from "react"
 import { useUpdateTodoMutation } from "../services/todoApi"
   import { toast } from 'react-toastify';
 import DeleteBTN from "./DeleteBTN";
-import UpdateAction from "./UpdateAction";
+import TodoModal from "./TodoModal";
+import { CiEdit } from "react-icons/ci";
+
 
 
 
 function TodoBox({todo}) {
 
-    const [todoData,setTodoData]=useState({
-        title:todo.title,
-        description:todo.description
-    })
+    const [openModal,setOpenModal]=useState(false)
 
-    const [state,formAction,isPending]=useActionState(handleUpdateTodo,null)
-
-    const [allowEdit,setAllowEdit]=useState(false)
-
-    const titleRef=useRef(null)
-    const descriptionRef=useRef(null)
-    const formRef=useRef(null)
 
     const [updateTodo]=useUpdateTodoMutation()
 
     const [optimisticStatus,updateOptimisticStatus]=useOptimistic(todo?.status,(prev,newStatus)=>({...prev,status:newStatus}))
-
-
-    useEffect(()=>{
-        function handleInputBlur(e){
-
-            if(!formRef.current.contains(e.target)){
-                setAllowEdit(false)
-            }
-            
-        }
-
-        document.addEventListener("click",handleInputBlur)
-        return ()=>{
-            document.removeEventListener("click",handleInputBlur)
-        }
-    })
 
    
     const toggleTodoStatus=useCallback(async()=>{
@@ -55,63 +31,12 @@ function TodoBox({todo}) {
         } else {
             toast.success("Task is in progress")
         }
-        setAllowEdit(false)
     },[todo,optimisticStatus,updateOptimisticStatus,updateTodo])
 
-
-    const handleEdit=useCallback((e)=>{
-        e.preventDefault()
-        setAllowEdit(true)
-        titleRef.current.focus()
-        titleRef.current.setSelectionRange(titleRef.current.value.length,titleRef.current.value.length)
-
-    },[])
-
- async function handleUpdateTodo(prevState,formData){
-    try{
-        const title=formData.get("title")
-        const description=formData.get("description")
-        if(!title){
-            toast.error("Title is required")
-            return {title:"Title is required"}
-        }
-        if(!description){
-            toast.error("Description is required")
-            return {description:"Description is required"}
-        }
-        if (title===todo.title && description===todo.description) {
-            toast.error("No changes are made")
-            return
-        }
-        await updateTodo({...todo,title,description})
-        setAllowEdit(false)
-        toast.success("Task updated successfully")
-    } catch(err){
-        toast.error("Error updating task")
-    }
- }
-    
-// function handleInputBlur(){
-//     setAllowEdit(false)
-// }
-// const handleInputBlur=useCallback((e)=>{
-//     setAllowEdit(false)
-// },[])
-
-// function handleInputFocus(){
-//     setAllowEdit(true)
-// }
-const handleInputFocus=useCallback(()=>{
-    setAllowEdit(true)
-},[])
-
-
-function handleInputChange(e){
-    setTodoData({...todoData,[e.target.name]:e.target.value})
-}
   return (
-    <form ref={formRef} action={formAction} className="w-full flex md:flex-row flex-col items-center justify-between gap-4  ">
-        {/* checkbox */}
+    <div  className={`w-full flex  flex-col items-center justify-between gap-4 border ${todo.status?"border-actionColor":"border-mainColor"} p-3 rounded-lg`}>
+       <div className="flex items-center gap-3 w-full">
+ {/* checkbox */}
 <div  className="checkbox-wrapper">
   <input  onChange={toggleTodoStatus} id={`todo-${todo.id}`} name="checkbox" defaultChecked={todo.status} type="checkbox"/>
   <label className="terms-label" htmlFor={`todo-${todo.id}`}>
@@ -127,29 +52,35 @@ function handleInputChange(e){
 </div>
         {/* checkbox */}
 
-        {/* inputs */}
+        {/* todos details */}
 
         <div className="flex flex-col flex-1 gap-2 w-full">
-            <input   onFocus={handleInputFocus} value={todoData.title} onChange={(e)=>handleInputChange(e)} ref={titleRef} placeholder="Add Task Title" className="bg-inputBG p-2 rounded-md text-mainColor outline-none focus:border focus:border-mainColor sm:text-base text-xs " type="text" name="title" />
-            {state?.title&&<span className="text-red-500 text-sm">{state.title}</span>}
-             <textarea  onFocus={handleInputFocus} value={todoData.description} onChange={(e)=>handleInputChange(e)} ref={descriptionRef} placeholder="Add Task Description" className="bg-inputBG p-2 rounded-md outline-none resize-none overflow-auto sm:text-base text-xs h-[100px] text-mainColor focus:border focus:border-mainColor" type="text" name="description" />
-    {state?.description&&<span className="text-red-500 text-sm">{state.description}</span>}
+            
+            <span className="bg-inputBG p-2 h-[40px] rounded-md text-mainColor outline-none  sm:text-base text-xs overflow-scroll  break-words ">{todo.title}</span>
+            <p className="bg-inputBG p-2 rounded-md overflow-scroll w-full  sm:text-base text-xs h-[100px] text-mainColor break-words">{todo.description}</p>
+             
 
         </div>
+                {/* todos details */}
 
-
-        {/* inputs */}
+       </div>
 
         {/* actions */}
 
-        <div className="flex items-center gap-2 min-w-[102px]">
-            <UpdateAction allowEdit={allowEdit}  handleEdit={handleEdit}/>
+        <div className="flex  items-center justify-end ms-auto gap-2 min-w-[102px]">
+
+            <TodoModal todoForEdit={todo} setIsOpen={setOpenModal} isOpen={openModal}>
+                        
+                         <button className="flex  gap-2  text-mainColor text-sm cursor-pointer" onClick={()=>setOpenModal(true)} type='button'>
+                              <CiEdit className="cursor-pointer text-xl"/>
+                            </button>
+                        </TodoModal>
            <DeleteBTN id={todo.id}/>
         </div>
 
         {/* actions */}
 
-    </form>
+    </div>
   )
 }
 

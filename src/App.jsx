@@ -12,7 +12,7 @@ function App() {
 
 
   return (
-  <div className='bg-backgroundColor '>
+  <div className='bg-backgroundColor min-h-screen'>
     <Navbar/>
      <Routes>
       <Route path="/" element={<Home />} />
