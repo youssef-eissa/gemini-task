@@ -49,6 +49,7 @@ function TodoModal({children,isOpen,setIsOpen,navigate,todoForEdit}) {
         await addTodo({title,description})
         setTodoDataSubmit({title:"",description:""})
         setIsOpen(false)
+        window.scrollTo({top:0,behavior:"smooth"})
         if(navigate){
             navigate("/todos")
         }
