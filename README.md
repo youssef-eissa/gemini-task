@@ -48,9 +48,9 @@ Visit the app here: https://gemini-task-inky.vercel.app
 
 ## 📝 Todo Modal
 
- Todo Modal is a reusable component for handling Todo submition or editing, in which displays different forms depending on needed operation
+ Todo Modal is a reusable component for handling Todo submission or editing, in which displays different forms depending on needed operation
 
---
+---
 
 ## 🔌 API & Data
 
