@@ -56,8 +56,8 @@ function TodoBox({todo}) {
 
         <div className="flex flex-col flex-1 gap-2 w-full">
             
-            <span className="bg-inputBG p-2 h-[40px] rounded-md text-mainColor outline-none  sm:text-base text-xs overflow-scroll  break-words ">{todo.title}</span>
-            <p className="bg-inputBG p-2 rounded-md overflow-scroll w-full  sm:text-base text-xs h-[100px] text-mainColor break-words">{todo.description}</p>
+            <span className="bg-inputBG p-2 h-[40px]  scrollBar rounded-md text-mainColor outline-none  sm:text-base text-xs overflow-y-auto  break-words ">{todo.title}</span>
+            <p className="bg-inputBG p-2 rounded-md scrollBar overflow-y-auto w-full  sm:text-base text-xs max-h-[100px] text-mainColor break-words">{todo.description}</p>
              
 
         </div>

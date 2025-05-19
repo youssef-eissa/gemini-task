@@ -14,7 +14,22 @@
   box-sizing: border-box;
 }
 
+.scrollBar::-webkit-scrollbar {
+  scrollbar-width: thin;            
+  -ms-overflow-style: none;         
+}
 
+.scrollBar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollBar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: var(--color-mainColor);
+}
 
 
 
