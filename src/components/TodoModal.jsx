@@ -23,11 +23,17 @@ function TodoModal({children,isOpen,setIsOpen,navigate,todoForEdit}) {
             
                 if(isOpen && e.target===modalRef.current){
                      setIsOpen(false)
+                     setTodoDataEdit({
+                        title:todoForEdit?.title,
+                        description:todoForEdit?.description
+                     })
+                     setTodoDataSubmit({title:"",description:""})
                 }
         }
         document.addEventListener("click",handleClick)
         return ()=>{
             document.removeEventListener("click",handleClick)
+            
         }
     },[isOpen])
 
@@ -101,9 +107,9 @@ function handleOnChangeSubmit(e){
             todoForEdit?
             
              <form action={formActionEdit} className=" lg:w-[600px] w-[90%]  lg:p-10 p-5 rounded-lg pb-2 flex flex-col gap-3 bg-[#353535] shadow-[0_0_30px_rgba(255,87,34,0.2)]">
-        <input value={todoDataEdit.title} onChange={e=>handleOnChangeEdit(e)} autoComplete="off" type="text" name="title" placeholder="Add Task Title" className={` bg-inputBG p-2 rounded-lg placeholder:text-placeholderColor sm:text-base text-xs text-mainColor outline-none ${stateEdit?.title&& "border border-red-500"}`}/>
+        <input value={todoDataEdit.title} onChange={e=>handleOnChangeEdit(e)} autoComplete="off" type="text" name="title" placeholder="Add Task Title" className={` bg-inputBG p-2 rounded-lg placeholder:text-placeholderColor sm:text-base text-xs text-mainColor scrollBar  outline-none ${stateEdit?.title&& "border border-red-500"}`}/>
       {stateEdit?.title&&<span className="text-red-500 text-sm">{stateEdit.title}</span>}
-         <textarea value={todoDataEdit.description} onChange={e=>handleOnChangeEdit(e)} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor text-mainColor resize-none h-[100px] outline-none ${stateEdit?.description&& "border border-red-500"}`}/>
+         <textarea value={todoDataEdit.description} onChange={e=>handleOnChangeEdit(e)} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor scrollBar break-all text-mainColor resize-none h-[100px] outline-none ${stateEdit?.description&& "border border-red-500 "}`}/>
     {stateEdit?.description&&<span className="text-red-500 text-sm">{stateEdit.description}</span>}
 
      <button disabled={isPendingEdit} type="submit" className="bg-actionColor lg:p-2 p-1 lg:text-base text-sm  rounded-lg text-black font-bold disabled:bg-actionColor/50 disabled:cursor-not-allowed cursor-pointer mt-5">Update</button>
@@ -115,7 +121,7 @@ function handleOnChangeSubmit(e){
             <form action={SubmitformAction} className=" lg:w-[600px] w-[90%] lg:p-10 p-5 rounded-lg pb-2 flex flex-col gap-3 bg-[#353535] shadow-[0_0_30px_rgba(255,87,34,0.2)]">
         <input value={todoDataSubmit.title} onChange={e=>handleOnChangeSubmit(e)} autoComplete="off" type="text" name="title" placeholder="Add Task Title" className={` bg-inputBG p-2 rounded-lg placeholder:text-placeholderColor sm:text-base text-xs text-mainColor outline-none ${stateSubmit?.title&& "border border-red-500"}`}/>
       {stateSubmit?.title&&<span className="text-red-500 text-sm">{stateSubmit.title}</span>}
-         <textarea value={todoDataSubmit.description} onChange={e=>handleOnChangeSubmit(e)} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor text-mainColor resize-none h-[100px] outline-none ${stateSubmit?.description&& "border border-red-500"}`}/>
+         <textarea value={todoDataSubmit.description} onChange={e=>handleOnChangeSubmit(e)} autoComplete="off" type="text" name="description" placeholder="Add Task Description" className={` bg-inputBG p-2 rounded-lg sm:text-base text-xs placeholder:text-placeholderColor scrollBar break-all text-mainColor resize-none h-[100px] outline-none ${stateSubmit?.description&& "border border-red-500"}`}/>
     {stateSubmit?.description&&<span className="text-red-500 text-sm">{stateSubmit.description}</span>}
 
      <button disabled={isPendingSubmit} type="submit" className="bg-actionColor lg:p-2 p-1 lg:text-base text-sm  rounded-lg text-black font-bold disabled:bg-actionColor/50 disabled:cursor-not-allowed cursor-pointer mt-5">Submit</button>
